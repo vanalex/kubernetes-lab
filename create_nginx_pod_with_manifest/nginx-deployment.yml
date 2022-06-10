@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment # kubernetes object type
+metadata:
+  name: nginx-deployment # deployment name
+  labels:
+    app: nginx
+spec:
+  replicas: 3 # number of replicas
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx # pod labels
+    spec:
+      containers:
+      - name: nginx # container name
+        image: nginx:1.14.2 # nginx image
+        imagePullPolicy: IfNotPresent # if exists, will not pull new image
+        ports: # container and host port assignments
+        - containerPort: 80
+        - containerPort: 443
